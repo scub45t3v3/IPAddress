@@ -32,9 +32,12 @@ npm install IPAddress
 
 Factory method to build and return an IP4Address or IP6Address object
 
-**returns:**  IP4Address | IP6Address
+**arguments:**
+1. `address: string`
 
-**throws:**  TypeError
+**returns:** IP4Address | IP6Address
+
+**throws:** TypeError
 
 ```javascript
 const {IP} = require('IPAddress');
@@ -43,14 +46,17 @@ let ipv4 = IP('127.0.0.1');
 let ipv6 = IP('::1');
 ```
 
-### `IP4Address([address: string]): IP4Address`
+### `IP4Address(address: ?string): IP4Address`
 **Added in:** v1.0.0
 
 IP4Address class constructor
 
-**returns:**  IP4Address
+**arguments:**
+1. `address: string | null | undefined`
 
-**throws:**  TypeError
+**returns:** IP4Address
+
+**throws:** TypeError
 
 ```javascript
 const {IP4Address} = require('IPAddress');
@@ -69,9 +75,9 @@ let ipv4 = IP4Address();
 #### `IP4Address.VERSION: string`
 **Added in:** v1.0.0
 
-Semantic version number
+Semantic version number of class definition
 
-**returns:**  string
+**returns:** string
 
 ```javascript
 const {IP4Address} = require('IPAddress');
@@ -85,7 +91,7 @@ ipv4.VERSION; // 1.0.0
 
 IP version number
 
-**returns:**  number
+**returns:** number
 
 ```javascript
 const {IP4Address} = require('IPAddress');
@@ -94,14 +100,14 @@ let ipv4 = new IP4Address();
 ipv4.IP_VERSION; // 4
 ```
 
-#### `IP4Address.address: string | null | undefined`
+#### `IP4Address.address: ?string`
 **Added in:** v1.0.0
 
-Property alias of `getAddress()` and `setAddress()` methods
+Property containing the ip address
 
-**returns:**  string | null | undefined
+**returns:** string | null | undefined
 
-**throws:**  TypeError
+**throws:** TypeError
 
 ```javascript
 const {IP4Address} = require('IPAddress');
@@ -120,12 +126,12 @@ ipv4.address = undefined;
 ipv4.address; // undefined
 ```
 
-#### `IP4Address.getAddress(): string | null | undefined`
+#### `IP4Address.getAddress(): ?string`
 **Added in:** v1.0.0
 
-getter method for address property
+Getter method for address property
 
-**returns:**  string | null | undefined
+**returns:** string | null | undefined
 
 ```javascript
 const {IP4Address} = require('IPAddress');
@@ -136,12 +142,15 @@ let ipv4 = new IP4Address('127.0.0.1');
 ipv4.getAddress(); // 127.0.0.1
 ```
 
-#### `IP4Address.setAddress([address: string]): IP4Address`
+#### `IP4Address.setAddress(address: ?string): IP4Address`
 **Added in:** v1.0.0
 
-setter method for address property
+Setter method for address property
 
-**returns:**  IP4Address
+**arguments:**
+1. `address: string | null | undefined`
+
+**returns:** IP4Address
 
 ```javascript
 const {IP4Address} = require('IPAddress');
@@ -169,11 +178,11 @@ ipv4.setAddress([]); // TypeError
 #### `IP4Address.public: boolean`
 **Added in:** v1.0.0
 
-Property alias for `isPublic()` method
+Property identifying if the address is public
 
-**returns:**  boolean
+**returns:** boolean
 
-**throws:**  TypeError
+**throws:** TypeError
 
 ```javascript
 const {IP4Address} = require('IPAddress');
@@ -199,9 +208,9 @@ ipv4.public = null; // TypeError
 #### `IP4Address.isPublic(): boolean`
 **Added in:** v1.0.0
 
-computed method identifying if the address is public
+Computed method identifying if the address is public
 
-**returns:**  boolean
+**returns:** boolean
 
 ```javascript
 const {IP4Address} = require('IPAddress');
@@ -222,11 +231,11 @@ ipv4.isPublic(); // true
 #### `IP4Address.private: boolean`
 **Added in:** v1.0.0
 
-Property alias for `isPrivate()` method
+Property identifying if the address is private
 
-**returns:**  boolean
+**returns:** boolean
 
-**throws:**  TypeError
+**throws:** TypeError
 
 ```javascript
 const {IP4Address} = require('IPAddress');
@@ -252,9 +261,9 @@ ipv4.private = null; // TypeError
 #### `IP4Address.isPrivate(): boolean`
 **Added in:** v1.0.0
 
-computed method identifying if the address is private
+Computed method identifying if the address is private
 
-**returns:**  boolean
+**returns:** boolean
 
 ```javascript
 const {IP4Address} = require('IPAddress');
@@ -275,11 +284,11 @@ ipv4.isPrivate(); // false
 #### `IP4Address.loopback: boolean`
 **Added in:** v1.0.0
 
-Property alias for `isLoopback()` method
+Property identifying if the address is a loopback
 
-**returns:**  boolean
+**returns:** boolean
 
-**throws:**  TypeError
+**throws:** TypeError
 
 ```javascript
 const {IP4Address} = require('IPAddress');
@@ -305,9 +314,9 @@ ipv4.loopback = null; // TypeError
 #### `IP4Address.isLoopback(): boolean`
 **Added in:** v1.0.0
 
-computed method identifying if the address is loopback
+Computed method identifying if the address is a loopback
 
-**returns:**  boolean
+**returns:** boolean
 
 ```javascript
 const {IP4Address} = require('IPAddress');
@@ -325,14 +334,17 @@ ipv4.address = '74.36.0.15';
 ipv4.isLoopback(); // false
 ```
 
-#### `IP4Address.isEqual([address: string | IP4Address]): boolean`
+#### `IP4Address.isEqual(address: ?string | IP4Address): boolean`
 **Added in:** v1.0.0
 
-method testing equality of version 4 ip addresses
+Method checking the equality of version 4 ip addresses
 
-**returns:**  boolean
+**arguments:**
+1. `address: string | IPAddress | null | undefined`
 
-**throws:**  TypeError
+**returns:** boolean
+
+**throws:** TypeError
 
 ```javascript
 const {IP4Address} = require('IPAddress');
@@ -351,9 +363,9 @@ ipv4.isEqual(5); // TypeError
 #### `IP4Address.toJSON(): object`
 **Added in:** v1.0.0
 
-method to get an object literal containing the address and metadata
+Method to retrieve an object literal containing the address and metadata
 
-**returns:**  object
+**returns:** object
 
 ```javascript
 const {IP4Address} = require('IPAddress');
@@ -368,9 +380,9 @@ JSON.stringify(ipv4); // '{"address": "127.0.0.1", "public": false, "private": f
 #### `IP4Address.toArray(): array`
 **Added in:** v1.0.0
 
-method to get an array of octets
+Method to retrieve an array of octets
 
-**returns:**  array
+**returns:** array
 
 ```javascript
 const {IP4Address} = require('IPAddress');
@@ -385,9 +397,9 @@ ipv4.toArray(); // []
 #### `IP4Address.toString(): string`
 **Added in:** v1.0.0
 
-method to get a string representation of address
+Method to retrieve a string representation of address
 
-**returns:**  string
+**returns:** string
 
 ```javascript
 const {IP4Address} = require('IPAddress');
@@ -399,14 +411,17 @@ ipv4.address = null;
 ipv4.toString(); // ''
 ```
 
-### `IP6Address([address: string]): IP6Address`
+### `IP6Address(address: ?string): IP6Address`
 **Added in:** v1.0.0
 
 IP6Address class constructor
 
-**returns:**  IP6Address
+**arguments:**
+1. `address: string | null | undefined`
 
-**throws:**  TypeError
+**returns:** IP6Address
+
+**throws:** TypeError
 
 ```javascript
 const {IP6Address} = require('IPAddress');
@@ -425,9 +440,9 @@ let ipv6 = IP6Address();
 #### `IP6Address.VERSION: string`
 **Added in:** v1.0.0
 
-Semantic version number
+Semantic version number of class definition
 
-**returns:**  string
+**returns:** string
 
 ```javascript
 const {IP6Address} = require('IPAddress');
@@ -441,7 +456,7 @@ ipv6.VERSION; // 1.0.0
 
 IP version number
 
-**returns:**  number
+**returns:** number
 
 ```javascript
 const {IP6Address} = require('IPAddress');
@@ -450,14 +465,14 @@ let ipv6 = new IP6Address();
 ipv6.IP_VERSION; // 6
 ```
 
-#### `IP6Address.address: string | null | undefined`
+#### `IP6Address.address: ?string`
 **Added in:** v1.0.0
 
-Property alias of `getAddress()` and `setAddress()` methods
+Property containing the ip address
 
-**returns:**  string | null | undefined
+**returns:** string | null | undefined
 
-**throws:**  TypeError
+**throws:** TypeError
 
 ```javascript
 const {IP6Address} = require('IPAddress');
@@ -476,12 +491,12 @@ ipv6.address = undefined;
 ipv6.address; // undefined
 ```
 
-#### `IP6Address.getAddress(): string | null | undefined`
+#### `IP6Address.getAddress(): ?string`
 **Added in:** v1.0.0
 
-getter method for address property
+Getter method for address property
 
-**returns:**  string | null | undefined
+**returns:** string | null | undefined
 
 ```javascript
 const {IP6Address} = require('IPAddress');
@@ -492,12 +507,15 @@ let ipv6 = new IP6Address('::1');
 ipv6.getAddress(); // ::1
 ```
 
-#### `IP6Address.setAddress([address: string]): IP6Address`
+#### `IP6Address.setAddress(address: ?string): IP6Address`
 **Added in:** v1.0.0
 
-setter method for address property
+Setter method for address property
 
-**returns:**  IP4Address
+**arguments:**
+1. `address: string | null | undefined`
+
+**returns:** IP4Address
 
 ```javascript
 const {IP6Address} = require('IPAddress');
@@ -525,11 +543,11 @@ ipv6.setAddress([]); // TypeError
 #### `IP6Address.public: boolean`
 **Added in:** v1.0.0
 
-Property alias for `isPublic()` method
+Property identifying if the address is public
 
-**returns:**  boolean
+**returns:** boolean
 
-**throws:**  TypeError
+**throws:** TypeError
 
 ```javascript
 const {IP6Address} = require('IPAddress');
@@ -555,9 +573,9 @@ ipv6.public = null; // TypeError
 #### `IP6Address.isPublic(): boolean`
 **Added in:** v1.0.0
 
-computed method identifying if the address is public
+Computed method identifying if the address is public
 
-**returns:**  boolean
+**returns:** boolean
 
 ```javascript
 const {IP6Address} = require('IPAddress');
@@ -578,11 +596,11 @@ ipv6.isPublic(); // true
 #### `IP6Address.private: boolean`
 **Added in:** v1.0.0
 
-Property alias for `isPrivate()` method
+Property identifying if the address is private
 
-**returns:**  boolean
+**returns:** boolean
 
-**throws:**  TypeError
+**throws:** TypeError
 
 ```javascript
 const {IP6Address} = require('IPAddress');
@@ -608,9 +626,9 @@ ipv6.private = null; // TypeError
 #### `IP6Address.isPrivate(): boolean`
 **Added in:** v1.0.0
 
-computed method identifying if the address is private
+Computed method identifying if the address is private
 
-**returns:**  boolean
+**returns:** boolean
 
 ```javascript
 const {IP6Address} = require('IPAddress');
@@ -631,11 +649,11 @@ ipv6.isPrivate(); // false
 #### `IP6Address.loopback: boolean`
 **Added in:** v1.0.0
 
-Property alias for `isLoopback()` method
+Property identifying if the address is a loopback
 
-**returns:**  boolean
+**returns:** boolean
 
-**throws:**  TypeError
+**throws:** TypeError
 
 ```javascript
 const {IP6Address} = require('IPAddress');
@@ -661,9 +679,9 @@ ipv6.loopback = null; // TypeError
 #### `IP6Address.isLoopback(): boolean`
 **Added in:** v1.0.0
 
-computed method identifying if the address is loopback
+Computed method identifying if the address is a loopback
 
-**returns:**  boolean
+**returns:** boolean
 
 ```javascript
 const {IP6Address} = require('IPAddress');
@@ -681,14 +699,17 @@ ipv6.address = '2001:db8::64:f7';
 ipv6.isLoopback(); // false
 ```
 
-#### `IP6Address.isEqual([address: string | IP6Address]): boolean`
+#### `IP6Address.isEqual(address: ?string | IP6Address): boolean`
 **Added in:** v1.0.0
 
-method testing equality of version 6 ip addresses
+Method checking the equality of version 6 ip addresses
 
-**returns:**  boolean
+**arguments:**
+1. `address: string | IP6Address | null | undefined`
 
-**throws:**  TypeError
+**returns:** boolean
+
+**throws:** TypeError
 
 ```javascript
 const {IP6Address} = require('IPAddress');
@@ -710,9 +731,9 @@ ipv6.isEqual(5); // TypeError
 #### `IP6Address.toJSON(): object`
 **Added in:** v1.0.0
 
-method to get an object literal containing the address and metadata
+Method to retrieve an object literal containing the address and metadata
 
-**returns:**  object
+**returns:** object
 
 ```javascript
 const {IP6Address} = require('IPAddress');
@@ -727,9 +748,9 @@ JSON.stringify(ipv6); // '{"address": "::1", "public": false, "private": false, 
 #### `IP6Address.toArray(): array`
 **Added in:** v1.0.0
 
-method to get an array of hextets
+Method to retrieve an array of hextets
 
-**returns:**  array
+**returns:** array
 
 ```javascript
 const {IP6Address} = require('IPAddress');
@@ -744,9 +765,9 @@ ipv6.toArray(); // []
 #### `IP6Address.toString(): string`
 **Added in:** v1.0.0
 
-method to get a string representation of address
+Method to retrieve a string representation of address
 
-**returns:**  string
+**returns:** string
 
 
 ```javascript

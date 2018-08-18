@@ -1,152 +1,188 @@
-(function() {
-  var IP6Address, isIPv6, pad, version;
+'use strict';
 
-  ({isIPv6} = require('net'));
+(() => {
+  // include dependencies
+  const {isIPv6} = require('net');
+  const {pad} = require('underscore.string');
+  const {version} = require('./package');
 
-  ({pad} = require('underscore.string'));
-
-  ({version} = require('./package'));
-
-  IP6Address = function(addr) {
-    var address, getAddress, isEqual, isLoopback, isPrivate, isPublic, notSetable, setAddress, toArray, toJSON, toString;
-    if (!(this instanceof IP6Address)) {
-      return new IP6Address(addr);
+  // IP6Address class definition
+  const IP6Address = function(value) {
+    // define auto instantiation
+    if (!new.target) {
+      return new IP6Address(value);
     }
-    address = void 0;
-    getAddress = function() {
+
+    // defined private properties
+    let address;
+
+    const getAddress = function() {
       return address;
-    };
-    setAddress = function(addr) {
-      addr = addr != null ? typeof addr.toString === "function" ? addr.toString().trim() : void 0 : void 0;
-      if (!isIPv6(addr) && (addr != null)) {
-        throw new TypeError(`${addr} must be a IPv6 address`);
+    }; // end getAddress
+
+    const setAddress = (value) => {
+      value = value && (value.toString() || `${value}`).trim();
+
+      if (value != null && !isIPv6(value)) {
+        throw new TypeError(`${value} must be a IPv6 address`);
       }
-      address = addr;
+
+      address = value || undefined;
+
       return this;
-    };
-    notSetable = function() {
+    }; // end setAddress
+
+    const notSetable = () => {
       throw new TypeError('value cannot be set');
-    };
-    isEqual = function(addr) {
-      if (!(addr instanceof IP6Address)) {
-        addr = new IP6Address(addr);
+    }; // end notSetable
+
+    const isEqual = (value) => {
+      if (!(value instanceof IP6Address)) {
+        value = new IP6Address(value);
       }
-      return this.toString() === addr.toString();
-    };
-    isPublic = function() {
+
+      return this.toString() === value.toString();
+    }; // end isEqual
+
+    const isPublic = () => {
       return !!this.address && !(this.isPrivate() || this.isLoopback());
-    };
-    isPrivate = function() {
+    }; // end isPublic
+
+    const isPrivate = () => {
       return /^f[cd]/i.test(this.address);
-    };
-    isLoopback = function() {
+    }; // end isPrivate
+
+    const isLoopback = () => {
       return /^(?:::1|(?:::f{4}:)?127(?:\.\d{1,3}){3})$/.test(this.address);
-    };
-    toArray = function() {
-      addr = this.address;
-      if (!(addr != null ? addr.length : void 0)) {
+    }; // end isLoopback
+
+    const toArray = () => {
+      let value = this.address;
+
+      if (!(value && value.length)) {
         return [];
       }
-      while (addr.split(':').length < 8) {
-        addr = addr.replace(/:(:+)/, ':$1:');
+
+      while (value.split(':').length < 8) {
+        value = value.replace(/:(:+)/, ':$1:');
       }
-      return addr.split(':').map(function(value) {
-        return pad(value, 4, '0');
-      });
-    };
-    toJSON = function() {
-      var opt;
-      opt = {
+
+      return value
+        .split(':')
+        .map((block) => {
+          return pad(block, 4, '0');
+        });
+    }; // end toArray
+
+    const toJSON = () => {
+      const opt = {
         address: this.address,
         public: this.public,
         loopback: this.loopback,
-        private: this.private
+        private: this.private,
       };
+
       return opt;
-    };
-    toString = function() {
-      return this.toArray().map(function(value) {
-        return value.replace(/^0+/, '');
-      }).reduce(function(memo, value, index, array) {
-        if (value === '') {
-          value = '0';
-        }
-        memo += `${value}:`;
-        return memo;
-      }, '').replace(/:$/, '').replace(/(?:\b0:)+/, '::').replace(':::', '::');
-    };
+    }; // end toJSON
+
+    const toString = () => {
+      return this
+        .toArray()
+        .map((value) => {
+          return value.replace(/^0+/, '');
+        })
+        .reduce((memo, value, index, array) => {
+          if (value === '') {
+            value = '0';
+          }
+
+          memo += `${value}:`;
+
+          return memo;
+        }, '')
+        .replace(/:$/, '')
+        .replace(/(?:\b0:)+/, '::')
+        .replace(':::', '::');
+    }; // end toString
+
     Object.defineProperties(this, {
       VERSION: {
         enumerable: false,
         writable: false,
-        value: version
+        value: version,
       },
       IP_VERSION: {
         enumerable: false,
         writable: false,
-        value: 6
+        value: 6,
       },
       address: {
         enumerable: true,
         get: getAddress,
-        set: setAddress
+        set: setAddress,
       },
       getAddress: {
         writable: false,
-        value: getAddress
+        value: getAddress,
       },
       setAddress: {
         writable: false,
-        value: setAddress
+        value: setAddress,
       },
       public: {
         enumerable: false,
         get: isPublic,
-        set: notSetable
+        set: notSetable,
       },
       isPublic: {
         writable: false,
-        value: isPublic
+        value: isPublic,
       },
       private: {
         enumerable: false,
         get: isPrivate,
-        set: notSetable
+        set: notSetable,
       },
       isPrivate: {
         writable: false,
-        value: isPrivate
+        value: isPrivate,
       },
       loopback: {
         enumerable: false,
         get: isLoopback,
-        set: notSetable
+        set: notSetable,
       },
       isLoopback: {
         writable: false,
-        value: isLoopback
+        value: isLoopback,
       },
       isEqual: {
         writable: false,
-        value: isEqual
+        value: isEqual,
       },
       toArray: {
         writable: false,
-        value: toArray
+        value: toArray,
       },
       toJSON: {
         writable: false,
-        value: toJSON
+        value: toJSON,
       },
       toString: {
         writable: false,
-        value: toString
-      }
+        value: toString,
+      },
+      [Symbol.toStringTag]: {
+        writable: false,
+        value: '@scuba-squad/ip6address',
+      },
     });
+
     Object.seal(this);
-    return this.setAddress(addr);
+
+    return this.setAddress(value);
   };
 
+  // export IP6Address as commonjs module
   module.exports = IP6Address;
-
-}).call(this);
+})(); // end IIFE

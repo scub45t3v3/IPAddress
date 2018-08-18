@@ -1,13 +1,13 @@
-(function() {
-  var IP, IP4Address, IP6Address, isIP;
+'use strict';
 
-  ({isIP} = require('net'));
+(() => {
+  // include dependencies
+  const {isIP} = require('net');
+  const IP4Address = require('./IP4Address');
+  const IP6Address = require('./IP6Address');
 
-  IP4Address = require('./IP4Address');
-
-  IP6Address = require('./IP6Address');
-
-  IP = function(value) {
+  // IP factory
+  const IP = (value) => {
     switch (isIP(value)) {
       case 4:
       case '4':
@@ -20,10 +20,8 @@
     }
   };
 
+  // export as commonjs module
   exports.IP = IP;
-
   exports.IP4Address = IP4Address;
-
   exports.IP6Address = IP6Address;
-
-}).call(this);
+})(); // end IIFE

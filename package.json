@@ -1,7 +1,7 @@
 {
-  "name": "IPAddress",
+  "name": "@scuba-sqaud/ipaddress",
   "description": "IP address parsing validation and manipulation",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "public": true,
   "main": "index.js",
   "license": "MIT",

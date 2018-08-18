@@ -40,7 +40,7 @@ Factory method to build and return an IP4Address or IP6Address object
 **throws:** TypeError
 
 ```javascript
-const {IP} = require('IPAddress');
+const {IP} = require('@scuba-squad/ipaddress');
 
 let ipv4 = IP('127.0.0.1');
 let ipv6 = IP('::1');
@@ -59,7 +59,7 @@ IP4Address class constructor
 **throws:** TypeError
 
 ```javascript
-const {IP4Address} = require('IPAddress');
+const {IP4Address} = require('@scuba-squad/ipaddress');
 
 let ipv4 = new IP4Address();
 ```
@@ -80,7 +80,7 @@ Semantic version number of class definition
 **returns:** string
 
 ```javascript
-const {IP4Address} = require('IPAddress');
+const {IP4Address} = require('@scuba-squad/ipaddress');
 
 let ipv4 = new IP4Address();
 ipv4.VERSION; // 1.0.0
@@ -94,7 +94,7 @@ IP version number
 **returns:** number
 
 ```javascript
-const {IP4Address} = require('IPAddress');
+const {IP4Address} = require('@scuba-squad/ipaddress');
 
 let ipv4 = new IP4Address();
 ipv4.IP_VERSION; // 4
@@ -110,7 +110,7 @@ Property containing the ip address
 **throws:** TypeError
 
 ```javascript
-const {IP4Address} = require('IPAddress');
+const {IP4Address} = require('@scuba-squad/ipaddress');
 
 // set address via setAddress()
 let ipv4 = new IP4Address('127.0.0.1');
@@ -134,7 +134,7 @@ Getter method for address property
 **returns:** string | null | undefined
 
 ```javascript
-const {IP4Address} = require('IPAddress');
+const {IP4Address} = require('@scuba-squad/ipaddress');
 
 // set address via setAddress()
 let ipv4 = new IP4Address('127.0.0.1');
@@ -153,7 +153,7 @@ Setter method for address property
 **returns:** IP4Address
 
 ```javascript
-const {IP4Address} = require('IPAddress');
+const {IP4Address} = require('@scuba-squad/ipaddress');
 
 // set address via setAddress()
 let ipv4 = new IP4Address('127.0.0.1');
@@ -185,7 +185,7 @@ Property identifying if the address is public
 **throws:** TypeError
 
 ```javascript
-const {IP4Address} = require('IPAddress');
+const {IP4Address} = require('@scuba-squad/ipaddress');
 
 let ipv4 = new IP4Address('127.0.0.1');
 // get public via isPublic()
@@ -213,7 +213,7 @@ Computed method identifying if the address is public
 **returns:** boolean
 
 ```javascript
-const {IP4Address} = require('IPAddress');
+const {IP4Address} = require('@scuba-squad/ipaddress');
 
 let ipv4 = new IP4Address('127.0.0.1');
 // get public via isPublic()
@@ -238,7 +238,7 @@ Property identifying if the address is private
 **throws:** TypeError
 
 ```javascript
-const {IP4Address} = require('IPAddress');
+const {IP4Address} = require('@scuba-squad/ipaddress');
 
 let ipv4 = new IP4Address('127.0.0.1');
 // get private via isPrivate()
@@ -266,7 +266,7 @@ Computed method identifying if the address is private
 **returns:** boolean
 
 ```javascript
-const {IP4Address} = require('IPAddress');
+const {IP4Address} = require('@scuba-squad/ipaddress');
 
 let ipv4 = new IP4Address('127.0.0.1');
 // get private via isPrivate()
@@ -291,7 +291,7 @@ Property identifying if the address is a loopback
 **throws:** TypeError
 
 ```javascript
-const {IP4Address} = require('IPAddress');
+const {IP4Address} = require('@scuba-squad/ipaddress');
 
 let ipv4 = new IP4Address('127.0.0.1');
 // get loopback via isLoopback()
@@ -319,7 +319,7 @@ Computed method identifying if the address is a loopback
 **returns:** boolean
 
 ```javascript
-const {IP4Address} = require('IPAddress');
+const {IP4Address} = require('@scuba-squad/ipaddress');
 
 let ipv4 = new IP4Address('127.0.0.1');
 // get loopback via isLoopback()
@@ -347,7 +347,7 @@ Method checking the equality of version 4 ip addresses
 **throws:** TypeError
 
 ```javascript
-const {IP4Address} = require('IPAddress');
+const {IP4Address} = require('@scuba-squad/ipaddress');
 
 let ipv4 = new IP4Address('127.0.0.1');
 ipv4.isEqual('127.0.0.1'); // true
@@ -368,7 +368,7 @@ Method to retrieve an object literal containing the address and metadata
 **returns:** object
 
 ```javascript
-const {IP4Address} = require('IPAddress');
+const {IP4Address} = require('@scuba-squad/ipaddress');
 
 let ipv4 = new IP4Address('127.0.0.1');
 ipv4.toJSON(); // {address: '127.0.0.1', public: false, private: false, loopback: true}
@@ -385,7 +385,7 @@ Method to retrieve an array of octets
 **returns:** array
 
 ```javascript
-const {IP4Address} = require('IPAddress');
+const {IP4Address} = require('@scuba-squad/ipaddress');
 
 let ipv4 = new IP4Address('127.0.0.1');
 ipv4.toArray(); // ['127', '0', '0', '1']
@@ -402,13 +402,26 @@ Method to retrieve a string representation of address
 **returns:** string
 
 ```javascript
-const {IP4Address} = require('IPAddress');
+const {IP4Address} = require('@scuba-squad/ipaddress');
 
 let ipv4 = new IP4Address('127.0.0.1');
 ipv4.toString(); // '127.0.0.1'
 // unset address via setAddress()
 ipv4.address = null;
 ipv4.toString(); // ''
+```
+
+#### `IP4Address[Symbol.toStringTag]: string`
+**Added in:** v1.0.0
+
+**returns:** string
+
+```javascript
+const {IP4Address} = require('@scuba-squad/ipaddress');
+
+let ipv4 = new IP6Address();
+ipv4[Symbol.toStringTag]; // '@scuba-squad/ip4address'
+Object.prototype.toString.call(ipv4); // '[object @scuba-squad/ip4address]'
 ```
 
 ### `IP6Address(address: ?string): IP6Address`
@@ -424,7 +437,7 @@ IP6Address class constructor
 **throws:** TypeError
 
 ```javascript
-const {IP6Address} = require('IPAddress');
+const {IP6Address} = require('@scuba-squad/ipaddress');
 
 let ipv6 = new IP6Address();
 ```
@@ -445,7 +458,7 @@ Semantic version number of class definition
 **returns:** string
 
 ```javascript
-const {IP6Address} = require('IPAddress');
+const {IP6Address} = require('@scuba-squad/ipaddress');
 
 let ipv6 = new IP6Address();
 ipv6.VERSION; // 1.0.0
@@ -459,7 +472,7 @@ IP version number
 **returns:** number
 
 ```javascript
-const {IP6Address} = require('IPAddress');
+const {IP6Address} = require('@scuba-squad/ipaddress');
 
 let ipv6 = new IP6Address();
 ipv6.IP_VERSION; // 6
@@ -475,7 +488,7 @@ Property containing the ip address
 **throws:** TypeError
 
 ```javascript
-const {IP6Address} = require('IPAddress');
+const {IP6Address} = require('@scuba-squad/ipaddress');
 
 // set address via setAddress()
 let ipv6 = new IP6Address('::1');
@@ -499,7 +512,7 @@ Getter method for address property
 **returns:** string | null | undefined
 
 ```javascript
-const {IP6Address} = require('IPAddress');
+const {IP6Address} = require('@scuba-squad/ipaddress');
 
 // set address via setAddress()
 let ipv6 = new IP6Address('::1');
@@ -518,7 +531,7 @@ Setter method for address property
 **returns:** IP4Address
 
 ```javascript
-const {IP6Address} = require('IPAddress');
+const {IP6Address} = require('@scuba-squad/ipaddress');
 
 // set address via setAddress()
 let ipv6 = new IP6Address('::1');
@@ -550,7 +563,7 @@ Property identifying if the address is public
 **throws:** TypeError
 
 ```javascript
-const {IP6Address} = require('IPAddress');
+const {IP6Address} = require('@scuba-squad/ipaddress');
 
 let ipv6 = new IP6Address('::1');
 // get public via isPublic()
@@ -578,7 +591,7 @@ Computed method identifying if the address is public
 **returns:** boolean
 
 ```javascript
-const {IP6Address} = require('IPAddress');
+const {IP6Address} = require('@scuba-squad/ipaddress');
 
 let ipv6 = new IP6Address('::1');
 // get public via isPublic()
@@ -603,7 +616,7 @@ Property identifying if the address is private
 **throws:** TypeError
 
 ```javascript
-const {IP6Address} = require('IPAddress');
+const {IP6Address} = require('@scuba-squad/ipaddress');
 
 let ipv6 = new IP6Address('::1');
 // get private via isPrivate()
@@ -631,7 +644,7 @@ Computed method identifying if the address is private
 **returns:** boolean
 
 ```javascript
-const {IP6Address} = require('IPAddress');
+const {IP6Address} = require('@scuba-squad/ipaddress');
 
 let ipv6 = new IP6Address('::1');
 // get private via isPrivate()
@@ -656,7 +669,7 @@ Property identifying if the address is a loopback
 **throws:** TypeError
 
 ```javascript
-const {IP6Address} = require('IPAddress');
+const {IP6Address} = require('@scuba-squad/ipaddress');
 
 let ipv6 = new IP6Address('::1');
 // get loopback via isLoopback()
@@ -684,7 +697,7 @@ Computed method identifying if the address is a loopback
 **returns:** boolean
 
 ```javascript
-const {IP6Address} = require('IPAddress');
+const {IP6Address} = require('@scuba-squad/ipaddress');
 
 let ipv6 = new IP6Address('::1');
 // get loopback via isLoopback()
@@ -712,7 +725,7 @@ Method checking the equality of version 6 ip addresses
 **throws:** TypeError
 
 ```javascript
-const {IP6Address} = require('IPAddress');
+const {IP6Address} = require('@scuba-squad/ipaddress');
 
 let ipv6 = new IP6Address('::1');
 ipv6.isEqual('::1'); // true
@@ -736,7 +749,7 @@ Method to retrieve an object literal containing the address and metadata
 **returns:** object
 
 ```javascript
-const {IP6Address} = require('IPAddress');
+const {IP6Address} = require('@scuba-squad/ipaddress');
 
 let ipv6 = new IP6Address('::1');
 ipv6.toJSON(); // {address: '::1', public: false, private: false, loopback: true}
@@ -753,7 +766,7 @@ Method to retrieve an array of hextets
 **returns:** array
 
 ```javascript
-const {IP6Address} = require('IPAddress');
+const {IP6Address} = require('@scuba-squad/ipaddress');
 
 let ipv6 = new IP6Address('::1');
 ipv6.toArray(); // ['0000', '0000', '0000', '0000', '0000', '0000', '0000', '0001']
@@ -771,7 +784,7 @@ Method to retrieve a string representation of address
 
 
 ```javascript
-const {IP6Address} = require('IPAddress');
+const {IP6Address} = require('@scuba-squad/ipaddress');
 
 let ipv6 = new IP6Address('::1');
 ipv6.toString(); // '::1'
@@ -783,8 +796,22 @@ ipv6.address = null;
 ipv6.toString(); // ''
 ```
 
+#### `IP6Address[Symbol.toStringTag]: string`
+**Added in:** v1.0.0
+
+**returns:** string
+
+```javascript
+const {IP6Address} = require('@scuba-squad/ipaddress');
+
+let ipv6 = new IP6Address();
+ipv6[Symbol.toStringTag]; // '@scuba-squad/ip6address'
+Object.prototype.toString.call(ipv6); // '[object @scuba-squad/ip6address]'
+```
+
 <a name="test"></a>
 ## Test
+[tests](TEST)
 ```bash
 npm install
 npm test

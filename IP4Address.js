@@ -1,134 +1,157 @@
-(function() {
-  var IP4Address, isIPv4, version;
+'use strict';
 
-  ({isIPv4} = require('net'));
+(() => {
+  // include dependencies
+  const {isIPv4} = require('net');
+  const {version} = require('./package');
 
-  ({version} = require('./package'));
-
-  IP4Address = function(addr) {
-    var address, getAddress, isEqual, isLoopback, isPrivate, isPublic, notSetable, setAddress, toArray, toJSON, toString;
-    if (!(this instanceof IP4Address)) {
-      return new IP4Address(addr);
+  // IP4Address class definition
+  const IP4Address = function(value) {
+    // define auto instantiation
+    if (!new.target) {
+      return new IP4Address(value);
     }
-    address = void 0;
-    getAddress = function() {
+
+    // define private properties
+    let address;
+
+    const getAddress = () => {
       return address;
-    };
-    setAddress = function(addr) {
-      addr = addr != null ? typeof addr.toString === "function" ? addr.toString().trim() : void 0 : void 0;
-      if (!isIPv4(addr) && (addr != null)) {
-        throw new TypeError(`${addr} must be a IPv4 address`);
+    }; // end getAddress
+
+    const setAddress = (value) => {
+      value = value && (value.toString() || `${value}`).trim();
+
+      if (value != null && !isIPv4(value)) {
+        throw new TypeError(`${value} must be a IPv4 address`);
       }
-      address = addr;
+
+      address = value || undefined;
+
       return this;
-    };
-    notSetable = function() {
+    }; // end setAddress
+
+    const notSetable = () => {
       throw new TypeError('value cannot be set');
-    };
-    isEqual = function(addr) {
-      if (!(addr instanceof IP4Address)) {
-        addr = new IP4Address(addr);
+    }; // end notSetable
+
+    const isEqual = (value) => {
+      if (!(value instanceof IP4Address)) {
+        value = new IP4Address(value);
       }
-      return this.toString() === addr.toString();
-    };
-    isPublic = function() {
+
+      return this.toString() === value.toString();
+    }; // end isEqual
+
+    const isPublic = () => {
       return !!this.address && !(this.isPrivate() || this.isLoopback());
-    };
-    isPrivate = function() {
+    }; // end isPublic
+
+    const isPrivate = () => {
       return /^(?:10|172\.(?:1[6-9]|2\d|3[0-1])|192\.168)\./.test(this.address);
-    };
-    isLoopback = function() {
+    }; // end isPrivate
+
+    const isLoopback = () => {
       return this.toArray()[0] === '127';
-    };
-    toArray = function() {
-      var ref;
-      return ((ref = this.address) != null ? typeof ref.split === "function" ? ref.split('.') : void 0 : void 0) || [];
-    };
-    toJSON = function() {
-      var opt;
-      opt = {
+    }; // end isLoopback
+
+    const toArray = () => {
+      return (this.address && this.address.split('.')) || [];
+    }; // end toArray
+
+    const toJSON = () => {
+      const opt = {
         address: this.address,
         public: this.public,
         loopback: this.loopback,
-        private: this.private
+        private: this.private,
       };
+
       return opt;
-    };
-    toString = function() {
+    }; // end toJSON
+
+    const toString = () => {
       return this.toArray().join('.');
-    };
+    }; // end toString
+
     Object.defineProperties(this, {
       VERSION: {
         enumerable: false,
         writable: false,
-        value: version
+        value: version,
       },
       IP_VERSION: {
         enumerable: false,
         writable: false,
-        value: 4
+        value: 4,
       },
       address: {
         enumerable: true,
         get: getAddress,
-        set: setAddress
+        set: setAddress,
       },
       getAddress: {
         writable: false,
-        value: getAddress
+        value: getAddress,
       },
       setAddress: {
         writable: false,
-        value: setAddress
+        value: setAddress,
       },
       public: {
         enumerable: false,
         get: isPublic,
-        set: notSetable
+        set: notSetable,
       },
       isPublic: {
         writable: false,
-        value: isPublic
+        value: isPublic,
       },
       private: {
         enumerable: false,
         get: isPrivate,
-        set: notSetable
+        set: notSetable,
       },
       isPrivate: {
         writable: false,
-        value: isPrivate
+        value: isPrivate,
       },
       loopback: {
         enumerable: false,
         get: isLoopback,
-        set: notSetable
+        set: notSetable,
       },
       isLoopback: {
         writable: false,
-        value: isLoopback
+        value: isLoopback,
       },
       isEqual: {
         writable: false,
-        value: isEqual
+        value: isEqual,
       },
       toArray: {
         writable: false,
-        value: toArray
+        value: toArray,
       },
       toJSON: {
         writable: false,
-        value: toJSON
+        value: toJSON,
       },
       toString: {
         writable: false,
-        value: toString
-      }
+        value: toString,
+      },
+      [Symbol.toStringTag]: {
+        writable: false,
+        value: '@scuba-squad/ip4address',
+      },
     });
-    Object.seal(this);
-    return this.setAddress(addr);
+
+    Object.freeze(this);
+
+    return this.setAddress(value);
   };
 
+  // export IP4Address as commonjs module
   module.exports = IP4Address;
-
-}).call(this);
+})(); // end IIFE

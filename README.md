@@ -811,7 +811,7 @@ Object.prototype.toString.call(ipv6); // '[object @scuba-squad/ip6address]'
 
 <a name="test"></a>
 ## Test
-[tests](TEST)
+[tests](TEST.md)
 ```bash
 npm install
 npm test

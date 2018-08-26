@@ -3,6 +3,7 @@
 <a name="status"></a>
 ## Status
 [![Build Status](https://travis-ci.org/scub45t3v3/IPAddress.svg?branch=master)](https://travis-ci.org/scub45t3v3/IPAddress)
+[![Coverage Status](https://coveralls.io/repos/github/scub45t3v3/IPAddress/badge.svg)](https://coveralls.io/github/scub45t3v3/IPAddress)
 
 <a name="toc"></a>
 ## Table of Content
